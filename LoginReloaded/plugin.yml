@@ -1,0 +1,37 @@
+name: LoginReloaded
+version: 1.0
+description: Add the login functionality to a Bukkit server.
+author: 8bitFra
+main: fra.plugin.login.Main
+
+commands:
+  login:
+    description: Login your account.
+  register:
+    description: Register your account.
+  logout:
+    description: Logout your account.
+  resetpw:
+    description: Register your account.
+    permission: loginreloaded.resetpw
+    permission-message: You do not have permission to use this command!
+  changepw:
+    description: Change your login password.
+    permission: loginreloaded.changepw
+    permission-message: You do not have permission to use this command!
+  check:
+    description: Allows to check the password of an user.
+    permission: loginreloaded.check
+    permission-message: You do not have permission to use this command!
+    
+
+permissions:
+  loginreloaded.resetpw:
+    description: Allows you to use the /resetpw passw.
+    default: op
+  loginreloaded.changepw:
+    description: Allows you to use the /changepw command.
+    default: true
+  loginreloaded.check:
+    description: Allows you to use the /check command.
+    default: op
