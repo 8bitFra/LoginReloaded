@@ -12,7 +12,7 @@ commands:
   logout:
     description: Logout your account.
   resetpw:
-    description: Register your account.
+    description: Reset the password of a specific user.
     permission: loginreloaded.resetpw
     permission-message: You do not have permission to use this command!
   changepw:
@@ -20,7 +20,7 @@ commands:
     permission: loginreloaded.changepw
     permission-message: You do not have permission to use this command!
   check:
-    description: Allows to check the password of an user.
+    description: Allows to check a specific user.
     permission: loginreloaded.check
     permission-message: You do not have permission to use this command!
     
