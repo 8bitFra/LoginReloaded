@@ -16,7 +16,7 @@
 ## Login Features
 - Highly configurable
 - Automatic login with configurable KeepAlive
-- Console log disabled for the /login - /register - /changepw commands
+- Console log disabled for the /login - /register - /changepw - /logout commands
 -  Password saved using a message-digest algorithm (MD5) in order to improve security
 - Sqlite db save
 
