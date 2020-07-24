@@ -9,13 +9,15 @@
 
 ## Update Ideas
 
-- Cooldown for the Ip AutoLogin
+- Prevent an already registered user from registering with another name
 - MySql Support
 
 ---
 ## Login Features
 - Highly configurable
-- Automatic login
+- Automatic login with configurable KeepAlive
+- Console log disabled for the /login - /register - /changepw commands
+-  Password saved using a message-digest algorithm (MD5) in order to improve security
 - Sqlite db save
 
 
@@ -29,17 +31,19 @@
   - Logout your account.
 - /changepw
   - Change your login password.
-- /resetpw
-  - Reset the password of a specific user (Must be online).
+- /unregister
+  - Delete a specific user's password.
 - /check
   - Allows to get some useful informations of a specific user.
 
 ## Permissions
 
+- loginreloaded.registration
+  - Allows you to use the /register - /login - /logout commands. (Default: true)
 - loginreloaded.changepw
   - Allows you to use the /changepw command. (Default: true)
-- loginreloaded.resetpw
-  - Allows you to use the /resetpw command. (Default: op)
+- loginreloaded.unregister
+  - Allows you to use the /unregister command. (Default: op)
 - loginreloaded.check
   - Allows you to use the /check command. (Default: op)
 
