@@ -36,12 +36,12 @@
 
 ## Permissions
 
-- loginreloaded.check
+- loginreloaded.changepw
   - Allows you to use the /changepw command. (Default: true)
 - loginreloaded.resetpw
   - Allows you to use the /resetpw passw. (Default: op)
-- loginreloaded.changepw
-  - Allows you to use the /changepw command. (Default: op)
+- loginreloaded.check
+  - Allows you to use the /check command. (Default: op)
 
 ## Contributors
 - CoredTV's SuperLogin plugin as a starting point.
