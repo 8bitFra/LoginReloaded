@@ -9,9 +9,11 @@ public class CreateDatabase
 		String url = "jdbc:sqlite:plugins/LoginReloaded/database.db";
 		
 		String sql = "CREATE TABLE IF NOT EXISTS users (\n" 
-				+ " uuid text PRIMARY KEY,\n"
+				+ " uuid text PRIMARY KEY,\n" //not used - future update
                 + " name text NOT NULL,\n"  
+                + " register_ip text,\n" //not used - future update
                 + " ip text,\n"  
+                + " session_open boolean,\n" //not used - future update
                 + " logged boolean,\n"  
                 + " pwhash text\n"
                 + ");";  

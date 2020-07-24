@@ -145,24 +145,25 @@ public class Handler
         }
     }
     
-    public static void ResetPassword(final Player p)
+    public static boolean Unregister(String player)
     {	
-    	String sql = "DELETE FROM users WHERE name = '"+p.getName()+"'";
+    	String sql = "DELETE FROM users WHERE name = '"+player+"'";
         
         try
         {  
             Statement stmt = conn.createStatement();   
             stmt.execute(sql);  
             stmt.close();
+            return true;
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7[E4]");
+        	//p.sendMessage("§cERROR: §7[E4]");
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
+            return false;
         }
     	
     	
-    	LogoutCommand(p);
     }
     
     public static void RefreshIPList() {

@@ -7,12 +7,18 @@ main: fra.plugin.login.Main
 commands:
   login:
     description: Login your account.
+    permission: loginreloaded.registration
+    permission-message: You do not have permission to use this command!
   register:
     description: Register your account.
+    permission: loginreloaded.registration
+    permission-message: You do not have permission to use this command!
   logout:
     description: Logout your account.
-  resetpw:
-    description: Reset the password of a specific user.
+    permission: loginreloaded.registration
+    permission-message: You do not have permission to use this command!
+  unregister:
+    description: Delete a specific user's password.
     permission: loginreloaded.resetpw
     permission-message: You do not have permission to use this command!
   changepw:
@@ -20,14 +26,17 @@ commands:
     permission: loginreloaded.changepw
     permission-message: You do not have permission to use this command!
   check:
-    description: Allows to check a specific user.
+    description: Get some useful informations of a user.
     permission: loginreloaded.check
     permission-message: You do not have permission to use this command!
     
 
 permissions:
-  loginreloaded.resetpw:
-    description: Allows you to use the /resetpw passw.
+  loginreloaded.registration:
+    description: Allows you to use the /register - /login - /logout commands.
+    default: true
+  loginreloaded.unregister:
+    description: Allows you to use the /unregister command.
     default: op
   loginreloaded.changepw:
     description: Allows you to use the /changepw command.

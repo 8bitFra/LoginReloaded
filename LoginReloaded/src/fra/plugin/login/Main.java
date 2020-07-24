@@ -79,7 +79,9 @@ public class Main extends JavaPlugin implements Listener
         final String Register = this.getConfig().getString("Messages.Register").replace("&", "§");
         final String Registered = this.getConfig().getString("Messages.AlreadyRegistered").replace("&", "§");
         final String AlreadyLoggedIn = this.getConfig().getString("Messages.AlreadyLoggedIn").replace("&", "§");
+        final String NotRegistered = this.getConfig().getString("Messages.NotRegistered").replace("&", "§");
         final String RegistrationSuccess = this.getConfig().getString("Messages.RegistrationSuccess").replace("&", "§");
+        final String UnregistrationSuccess = this.getConfig().getString("Messages.UnregistrationSuccess").replace("&", "§");
         final String ChoosenPW = this.getConfig().getString("Messages.ChoosenPW").replace("&", "§");
         final String ChangeUsage = this.getConfig().getString("Messages.ChangePWUsage").replace("&", "§");
         final String ChangeSuccess = this.getConfig().getString("Messages.ChangeSuccess").replace("&", "§");
@@ -87,131 +89,144 @@ public class Main extends JavaPlugin implements Listener
         final String PWnotMatch = this.getConfig().getString("Messages.PwNotMatch").replace("&", "§");
         final String HaveToLogin = this.getConfig().getString("Messages.HaveToLogin").replace("&", "§");
         final String WrongPW = this.getConfig().getString("Messages.WrongLogin").replace("&", "§");
-        final String NotOnline = this.getConfig().getString("Messages.NotOnline").replace("&", "§");
         final String NotPassword = this.getConfig().getString("Messages.NotPassword").replace("&", "§");
         final String MinSix = this.getConfig().getString("Messages.MinSix").replace("&", "§");
+        final String Error = this.getConfig().getString("Messages.Error").replace("&", "§");
         final String Check1 = this.getConfig().getString("Check.Line1").replace("&", "§");
         final String Check2 = this.getConfig().getString("Check.Line2").replace("&", "§");
         final String Check3 = this.getConfig().getString("Check.Line3").replace("&", "§");
         final String Check4 = this.getConfig().getString("Check.Line4").replace("&", "§");
-        final String Check5 = this.getConfig().getString("Check.Line5").replace("&", "§");
-        final String Check6 = this.getConfig().getString("Check.Line6").replace("&", "§");
+        //final String Check5 = this.getConfig().getString("Check.Line5").replace("&", "§");
+        final String Check6= this.getConfig().getString("Check.Line6").replace("&", "§");
+        final String Check7 = this.getConfig().getString("Check.Line7").replace("&", "§");
         final String Usage = this.getConfig().getString("Check.Usage").replace("&", "§");
         final Player p = (Player)sender;
         if (cmd.getName().equalsIgnoreCase("register")) 
         {
-            if (Handler.isRegistered(p.getName())) {
-                p.sendMessage(Registered);
-            }
-            else {
-                if (args.length == 0) {
-                    p.sendMessage(Register);
-                }
-                if (args.length == 1) {
-                    p.sendMessage(Register);
-                }
-                if (args.length == 2) {
-                    if (args[0].equals(args[1])) {
-                    	
-                    	int count = 0;    
-                        String password = args[1];
-                        //Counts each character except space    
-                        for(int i = 0; i < password.length(); i++) 
-                        {    
-                            if(password.charAt(i) != ' ')    
-                                count++;    
-                        }
-                        
-                        if(count < 6)
-                        {
-                        	p.sendMessage(MinSix);
-                        }
-                        else if (password.compareTo("password") == 0)
-                        {
-                        	p.sendMessage(NotPassword);
-                        }
-                        else
-                        {
-                        	Handler.RegisterPlayer(p, args[0]);
-                            Handler.removeEffects(p);
-                            p.sendMessage(RegistrationSuccess);
-                            p.sendMessage(String.valueOf(ChoosenPW) + args[0]);
-                            this.removeSaveList(p);
-                            Handler.Login(p);
-                            if (this.allowIPsaving) {
-                                String address = p.getAddress().toString().replace("/", "");
-                                final int Port = p.getAddress().getPort();
-                                address = address.replace(":" + Port, "");
-                                Handler.RegisterNewIP(p, address);
-                            }
-                            else {
-                            	System.out.println("[LOGIN] IP was not saved.");
-                                System.out.println("[LOGIN] Activate IP storage in the config.");
-                            }
-                        }
-                    	                     
-                    }
-                    else {
-                        p.sendMessage(PWnotMatch);
-                        Handler.WrongLogin(p);
-                    }
-                }
-            }
-        }
-        else if (cmd.getName().equalsIgnoreCase("login")) 
-        {
-            if (Handler.isRegistered(p.getName())) {
-                if (Handler.isLoggedIn(p.getName())) {
-                    p.sendMessage(AlreadyLoggedIn);
+        	if (p.hasPermission("loginreloaded.registration")) 
+        	{
+        		if (Handler.isRegistered(p.getName())) {
+                    p.sendMessage(Registered);
                 }
                 else {
                     if (args.length == 0) {
-                        p.sendMessage(Login);
+                        p.sendMessage(Register);
                     }
                     if (args.length == 1) {
-                        final String clan = args[0];
-                        if (Handler.PasswordMatch(p, clan)) {
-                            p.sendMessage(LoginSuccess);
-                            Handler.removeEffects(p);
-                            this.removeSaveList(p);
-                            Handler.Login(p);
-                            if (this.allowIPsaving) 
-                            {
-                                String address2 = p.getAddress().toString().replace("/", "");
-                                final int Port2 = p.getAddress().getPort();
-                                address2 = address2.replace(":" + Port2, "");
-                                Handler.RegisterNewIP(p, address2);
+                        p.sendMessage(Register);
+                    }
+                    if (args.length == 2) {
+                        if (args[0].equals(args[1])) {
+                        	
+                        	int count = 0;    
+                            String password = args[1];
+                            //Counts each character except space    
+                            for(int i = 0; i < password.length(); i++) 
+                            {    
+                                if(password.charAt(i) != ' ')    
+                                    count++;    
                             }
-                            else 
+                            
+                            if(count < 6)
                             {
-                                System.out.println("[LOGIN] IP was not saved.");
-                                System.out.println("[LOGIN] Activate IP storage in the config.");
+                            	p.sendMessage(MinSix);
                             }
+                            else if (password.compareTo("password") == 0)
+                            {
+                            	p.sendMessage(NotPassword);
+                            }
+                            else
+                            {
+                            	Handler.RegisterPlayer(p, args[0]);
+                                Handler.removeEffects(p);
+                                p.sendMessage(RegistrationSuccess);
+                                p.sendMessage(String.valueOf(ChoosenPW) + args[0]);
+                                this.removeSaveList(p);
+                                Handler.Login(p);
+                                if (this.allowIPsaving) {
+                                    String address = p.getAddress().toString().replace("/", "");
+                                    final int Port = p.getAddress().getPort();
+                                    address = address.replace(":" + Port, "");
+                                    Handler.RegisterNewIP(p, address);
+                                }
+                                else {
+                                	System.out.println("[LOGIN] IP was not saved.");
+                                    System.out.println("[LOGIN] Activate IP storage in the config.");
+                                }
+                            }
+                        	                     
                         }
                         else {
-                            p.sendMessage(WrongPW);
+                            p.sendMessage(PWnotMatch);
                             Handler.WrongLogin(p);
                         }
                     }
                 }
-            }
+        	}
+            
+        }
+        else if (cmd.getName().equalsIgnoreCase("login")) 
+        {
+        	if (p.hasPermission("loginreloaded.registration")) 
+        	{
+        		if (Handler.isRegistered(p.getName())) {
+                    if (Handler.isLoggedIn(p.getName())) {
+                        p.sendMessage(AlreadyLoggedIn);
+                    }
+                    else {
+                        if (args.length == 0) {
+                            p.sendMessage(Login);
+                        }
+                        if (args.length == 1) {
+                            final String clan = args[0];
+                            if (Handler.PasswordMatch(p, clan)) {
+                                p.sendMessage(LoginSuccess);
+                                Handler.removeEffects(p);
+                                this.removeSaveList(p);
+                                Handler.Login(p);
+                                if (this.allowIPsaving) 
+                                {
+                                    String address2 = p.getAddress().toString().replace("/", "");
+                                    final int Port2 = p.getAddress().getPort();
+                                    address2 = address2.replace(":" + Port2, "");
+                                    Handler.RegisterNewIP(p, address2);
+                                }
+                                else 
+                                {
+                                    System.out.println("[LOGIN] IP was not saved.");
+                                    System.out.println("[LOGIN] Activate IP storage in the config.");
+                                }
+                            }
+                            else {
+                                p.sendMessage(WrongPW);
+                                Handler.WrongLogin(p);
+                            }
+                        }
+                    }
+                }
+        	}
+            
             else {
                 p.sendMessage(Register);
             }
         }
         else if (cmd.getName().equalsIgnoreCase("logout"))
         {
-        	if (Handler.isRegistered(p.getName())) 
+        	if (p.hasPermission("loginreloaded.registration")) 
         	{
-                if (Handler.isLoggedIn(p.getName())) 
-                {
-                    Handler.LogoutCommand(p);
-                }
+        		if (Handler.isRegistered(p.getName())) 
+        		{
+        			if (Handler.isLoggedIn(p.getName())) 
+        			{
+        				Handler.LogoutCommand(p);
+        			}
+        		}
         	}
         }
         else if (cmd.getName().equalsIgnoreCase("check")) 
         {
-            if (p.hasPermission("loginreloaded.check")) {
+            if (p.hasPermission("loginreloaded.check")) 
+            {
                 if (args.length == 0) {
                     p.sendMessage(Usage);
                 }
@@ -222,8 +237,8 @@ public class Main extends JavaPlugin implements Listener
                         p.sendMessage(Check2);                                
      
                         p.sendMessage(String.valueOf(Check4) + Handler.isOnline(args[0]));
-                        p.sendMessage(String.valueOf(Check5) + Handler.getIpAddress(args[0]));
-                        p.sendMessage(String.valueOf(Check6) + Handler.getMD5Password(args[0]));
+                        p.sendMessage(String.valueOf(Check6) + Handler.getIpAddress(args[0]));
+                        p.sendMessage(String.valueOf(Check7) + Handler.getMD5Password(args[0]));
                     }
                     else {
                         p.sendMessage(Check3);
@@ -231,24 +246,38 @@ public class Main extends JavaPlugin implements Listener
                 }
             }
         }
-        else if (cmd.getName().equalsIgnoreCase("resetpw"))
+        else if (cmd.getName().equalsIgnoreCase("unregister"))
         {
-        	if (p.hasPermission("loginreloaded.resetpw")) 
+        	if (p.hasPermission("loginreloaded.unregister")) 
         	{
         		if (args.length != 0)
            	 	{
-        			try
-        			{
-        				final Player target = getServer().getPlayer(args[0]);
-               		 	if (Handler.isRegistered(target.getName())) 
-               		 	{
-               		 		Handler.ResetPassword(target);
-               		 	}
-        			}
-           		 	catch(Exception e)
-        			{
-           		 		p.sendMessage(NotOnline);
-        			}
+        			final Player target = getServer().getPlayer(args[0]);
+               		if (Handler.isRegistered(args[0])) 
+               		{
+               			boolean result;
+               			
+               			if(target == null)
+               			{
+               				result = Handler.Unregister(args[0]);
+               				
+               				if(result) p.sendMessage(UnregistrationSuccess);
+               				else p.sendMessage(Error);
+               			}
+               			else
+               			{
+               				result = Handler.Unregister(args[0]);
+               				
+               				if(result) p.sendMessage(UnregistrationSuccess);
+               				else p.sendMessage(Error);
+               				
+               				Handler.LogoutCommand(target);
+               			}
+               		}
+               		else
+               		{
+               			p.sendMessage(NotRegistered);
+               		}
            	 	}
         	}
         	 

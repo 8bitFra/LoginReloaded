@@ -102,6 +102,20 @@ public static Main main;
     public void onLogout(final PlayerQuitEvent e) {
         final Player p = e.getPlayer();
         Handler.Logout(p);
+        
+        long keepAlive = main.getConfig().getLong("QuitKeepAlive") * 20;
+        
+        main.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+			public void run() 
+			{
+				Player pl = main.getServer().getPlayer(p.getName());
+				if (pl == null) 
+				{
+					//System.out.println("[LOGIN] " + p.getName() + " removed from autologin list!");
+					Handler.removeIp(p);
+				}
+			}
+		}, keepAlive);
     }
     
     @EventHandler
