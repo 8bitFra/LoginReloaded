@@ -13,6 +13,11 @@
 - MySql Support
 
 ---
+## Login Features
+- Highly configurable
+- Automatic login
+- Sqlite db save
+
 
 ## Commands
 
