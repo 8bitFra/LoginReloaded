@@ -46,5 +46,6 @@
 ## Contributors
 - CoredTV's SuperLogin plugin as a starting point.
   - <a href="https://www.spigotmc.org/resources/superlogin-a-login-system.20324/">His Plugin</a>
+- Icon provided by Chuckchee on this <a href="https://icons-for-free.com/lock-131982518830500474/">Website</a>
 ---
 
