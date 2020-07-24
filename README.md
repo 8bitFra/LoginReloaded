@@ -17,29 +17,29 @@
 ## Commands
 
 - /register
--- Register your account.
+  - Register your account.
 - /login
--- Login your account.
+  - Login your account.
 - /logout
--- Logout your account.
+  - Logout your account.
 - /changepw
--- Change your login password.
+  - Change your login password.
 - /resetpw
--- Reset the password of a specific user (Must be online).
+  - Reset the password of a specific user (Must be online).
 - /check
--- Allows to get some useful informations of a specific user.
+  - Allows to get some useful informations of a specific user.
 
 ## Permissions
 
 - loginreloaded.check
--- Allows you to use the /changepw command. (Default: true)
+  - Allows you to use the /changepw command. (Default: true)
 - loginreloaded.resetpw
--- Allows you to use the /resetpw passw. (Default: op)
+  - Allows you to use the /resetpw passw. (Default: op)
 - loginreloaded.changepw
--- Allows you to use the /changepw command. (Default: op)
+  - Allows you to use the /changepw command. (Default: op)
 
 ## Contributors
 - CoredTV's SuperLogin plugin as a starting point.
--- <a href="https://www.spigotmc.org/resources/superlogin-a-login-system.20324/">His Plugin</a>
+  - <a href="https://www.spigotmc.org/resources/superlogin-a-login-system.20324/">His Plugin</a>
 ---
 
