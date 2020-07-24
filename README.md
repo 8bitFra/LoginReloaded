@@ -38,5 +38,8 @@
 - loginreloaded.changepw
 -- Allows you to use the /changepw command. (Default: op)
 
+## Contributors
+- CoredTV's SuperLogin plugin as a starting point.
+-- <a href="https://www.spigotmc.org/resources/superlogin-a-login-system.20324/">His Plugin</a>
 ---
 
