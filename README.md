@@ -39,7 +39,7 @@
 - loginreloaded.changepw
   - Allows you to use the /changepw command. (Default: true)
 - loginreloaded.resetpw
-  - Allows you to use the /resetpw passw. (Default: op)
+  - Allows you to use the /resetpw command. (Default: op)
 - loginreloaded.check
   - Allows you to use the /check command. (Default: op)
 
