@@ -39,6 +39,10 @@ public class Main extends JavaPlugin implements Listener
 		{
 			CreateDatabase.inizializeDatabase();
 		}
+		else
+		{
+			CreateDatabase.checkifdbupdated();
+		}
         
         this.getServer().getPluginManager().registerEvents((Listener)new Listeners(this), (Plugin)this);
         for (final Player all : Bukkit.getOnlinePlayers()) {
@@ -91,6 +95,7 @@ public class Main extends JavaPlugin implements Listener
         final String WrongPW = this.getConfig().getString("Messages.WrongLogin").replace("&", "§");
         final String NotPassword = this.getConfig().getString("Messages.NotPassword").replace("&", "§");
         final String MinSix = this.getConfig().getString("Messages.MinSix").replace("&", "§");
+        final String IpReach = this.getConfig().getString("Messages.IpReach").replace("&", "§");
         final String Error = this.getConfig().getString("Messages.Error").replace("&", "§");
         final String Check1 = this.getConfig().getString("Check.Line1").replace("&", "§");
         final String Check2 = this.getConfig().getString("Check.Line2").replace("&", "§");
@@ -137,21 +142,41 @@ public class Main extends JavaPlugin implements Listener
                             }
                             else
                             {
-                            	Handler.RegisterPlayer(p, args[0]);
-                                Handler.removeEffects(p);
-                                p.sendMessage(RegistrationSuccess);
-                                p.sendMessage(String.valueOf(ChoosenPW) + args[0]);
-                                this.removeSaveList(p);
-                                Handler.Login(p);
-                                if (this.allowIPsaving) {
-                                    String address = p.getAddress().toString().replace("/", "");
+                                if (this.allowIPsaving) 
+                                {
+                                	String address = p.getAddress().toString().replace("/", "");
                                     final int Port = p.getAddress().getPort();
                                     address = address.replace(":" + Port, "");
-                                    Handler.RegisterNewIP(p, address);
+                                    
+                                	if(Handler.RegisterIpManager(address))
+                                	{
+                                		Handler.RegisterPlayer(p, args[0]);
+                                        Handler.removeEffects(p);
+                                        p.sendMessage(RegistrationSuccess);
+                                        p.sendMessage(String.valueOf(ChoosenPW) + args[0]);
+                                        this.removeSaveList(p);
+                                        Handler.Login(p);
+                                       
+                                        Handler.UpdateDynIp(p, address);
+                                	}
+                                	else
+                                	{
+                                		p.sendMessage(IpReach);
+                                	}
+                                    
+                                    
                                 }
-                                else {
+                                else 
+                                {
                                 	System.out.println("[LOGIN] IP was not saved.");
                                     System.out.println("[LOGIN] Activate IP storage in the config.");
+                                    
+                                    Handler.RegisterPlayer(p, args[0]);
+                                    Handler.removeEffects(p);
+                                    p.sendMessage(RegistrationSuccess);
+                                    p.sendMessage(String.valueOf(ChoosenPW) + args[0]);
+                                    this.removeSaveList(p);
+                                    Handler.Login(p);
                                 }
                             }
                         	                     
@@ -189,7 +214,7 @@ public class Main extends JavaPlugin implements Listener
                                     String address2 = p.getAddress().toString().replace("/", "");
                                     final int Port2 = p.getAddress().getPort();
                                     address2 = address2.replace(":" + Port2, "");
-                                    Handler.RegisterNewIP(p, address2);
+                                    Handler.UpdateDynIp(p, address2);
                                 }
                                 else 
                                 {
