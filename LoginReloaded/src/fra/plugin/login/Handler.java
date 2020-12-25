@@ -113,7 +113,7 @@ public class Handler
         }
     }
     
-    public static boolean RegisterIpManager(final String address) {
+    public static boolean RegisterIpManager(final String address, int AccountNumber) {
     	
     	boolean result = true;
     	int empty = -1;
@@ -135,6 +135,8 @@ public class Handler
                 System.out.println(e.getMessage());
         }
     	
+    	 
+    	 
     	if (empty==-1) 
     	{
     		String sql_e = "INSERT INTO ips (ip, amount) VALUES(?,?)";
@@ -156,7 +158,7 @@ public class Handler
     	else
     	{
     		int value = empty+1;
-    		int AccountNumber = main.getConfig().getInt("AccountNumber");
+    		
     		
     		if(value > AccountNumber)
     		{
@@ -217,7 +219,8 @@ public class Handler
     public static boolean Unregister(String player)
     {	
     	String sql = "DELETE FROM users WHERE name = '"+player+"'";
-        
+    	String ipclient = Handler.getIpAddress(player);
+    	
         try
         {  
             Statement stmt = conn.createStatement();   
@@ -226,7 +229,8 @@ public class Handler
             
             int empty = -1;
         	
-        	String sql_check = "SELECT * FROM ips WHERE ip='"+Handler.getIpAddress(player)+"'";
+            
+        	String sql_check = "SELECT * FROM ips WHERE ip='"+ipclient+"'";
         	
         	 try
         	 {
@@ -246,7 +250,7 @@ public class Handler
         	 if (empty!=-1)
         	 {
         		 int value = empty-1;
-        		 String sql_ne = "UPDATE ips SET amount = '"+ value +"' WHERE ip = '"+Handler.getIpAddress(player)+"'";
+        		 String sql_ne = "UPDATE ips SET amount = '"+ value +"' WHERE ip = '"+ipclient+"'";
          		try
                  {  
                      Statement stmt1 = conn.createStatement();   

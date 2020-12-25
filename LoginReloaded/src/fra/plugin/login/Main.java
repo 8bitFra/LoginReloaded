@@ -105,6 +105,10 @@ public class Main extends JavaPlugin implements Listener
         final String Check6= this.getConfig().getString("Check.Line6").replace("&", "§");
         final String Check7 = this.getConfig().getString("Check.Line7").replace("&", "§");
         final String Usage = this.getConfig().getString("Check.Usage").replace("&", "§");
+        
+        final int IpAmount = this.getConfig().getInt("AccountNumber");
+        
+        
         final Player p = (Player)sender;
         if (cmd.getName().equalsIgnoreCase("register")) 
         {
@@ -148,7 +152,9 @@ public class Main extends JavaPlugin implements Listener
                                     final int Port = p.getAddress().getPort();
                                     address = address.replace(":" + Port, "");
                                     
-                                	if(Handler.RegisterIpManager(address))
+                                    //Handler.RegisterIpManager(address)
+                                    
+                                	if(Handler.RegisterIpManager(address,IpAmount))
                                 	{
                                 		Handler.RegisterPlayer(p, args[0]);
                                         Handler.removeEffects(p);
@@ -344,6 +350,5 @@ public class Main extends JavaPlugin implements Listener
     public void removeSaveList(final Player p) {
         this.player.remove(p);
     }
-	
 	
 }
