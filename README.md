@@ -9,7 +9,6 @@
 
 ## Update Ideas
 
-- Prevent an already registered user from registering with another name
 - MySql Support
 
 ---
@@ -19,6 +18,9 @@
 - Console log disabled for the /login - /register - /changepw - /logout commands
 -  Password saved using a message-digest algorithm (MD5) in order to improve security
 - Sqlite db save
+
+### NEW
+- Ability to choose how many accounts a user can register
 
 
 ## Commands
