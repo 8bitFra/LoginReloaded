@@ -13,6 +13,7 @@ import org.bukkit.potion.*;
 
 public class Handler
 {
+	public static Main main;
 	private static String url = "jdbc:sqlite:plugins/LoginReloaded/database.db";
 	private static Connection conn;
 	
@@ -96,7 +97,7 @@ public class Handler
         p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_BREAK, 5.0f, 12.0f);
     }
     
-    public static void RegisterNewIP(final Player p, final String address) {     
+    public static void UpdateDynIp(final Player p, final String address) {     
         String sql = "UPDATE users SET ip = '"+ address +"' WHERE name = '"+p.getName()+"'";
         
         try
@@ -110,6 +111,76 @@ public class Handler
         	p.sendMessage("§cERROR: §7Es [E2]");
             System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
         }
+    }
+    
+    public static boolean RegisterIpManager(final String address, int AccountNumber) {
+    	
+    	boolean result = true;
+    	int empty = -1;
+    	
+    	String sql_check = "SELECT * FROM ips WHERE ip='"+address+"'";
+    	
+    	 try
+    	 {
+    		Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql_check);
+                
+           while (rs.next()) 
+           {
+        	   empty=rs.getInt("amount");
+           }
+        } 
+    	catch (SQLException e) 
+    	{
+                System.out.println(e.getMessage());
+        }
+    	
+    	 
+    	 
+    	if (empty==-1) 
+    	{
+    		String sql_e = "INSERT INTO ips (ip, amount) VALUES(?,?)";
+    		
+    		try
+            {   
+                PreparedStatement pstmt = conn.prepareStatement(sql_e);  
+                pstmt.setString(1, address);
+                pstmt.setInt(2, 1); 
+                pstmt.executeUpdate();
+                pstmt.close();
+            } 
+            catch (SQLException e) 
+            {  
+                System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
+            }
+    		
+    	}
+    	else
+    	{
+    		int value = empty+1;
+    		
+    		
+    		if(value > AccountNumber)
+    		{
+    			result = false;
+    		}
+    		else
+    		{
+    			String sql_ne = "UPDATE ips SET amount = '"+ value +"' WHERE ip = '"+address+"'";
+        		try
+                {  
+                    Statement stmt = conn.createStatement();   
+                    stmt.execute(sql_ne);  
+                    stmt.close();
+                } 
+                catch (SQLException e) 
+                {  
+                    System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
+                }
+    		}
+    	}
+    	
+    	return result;
     }
     
     public static void ChangePassword(final Player p, final String pw) {
@@ -148,12 +219,50 @@ public class Handler
     public static boolean Unregister(String player)
     {	
     	String sql = "DELETE FROM users WHERE name = '"+player+"'";
-        
+    	String ipclient = Handler.getIpAddress(player);
+    	
         try
         {  
             Statement stmt = conn.createStatement();   
             stmt.execute(sql);  
             stmt.close();
+            
+            int empty = -1;
+        	
+            
+        	String sql_check = "SELECT * FROM ips WHERE ip='"+ipclient+"'";
+        	
+        	 try
+        	 {
+        		Statement stmt1  = conn.createStatement();
+                ResultSet rs    = stmt1.executeQuery(sql_check);
+                    
+               while (rs.next()) 
+               {
+            	   empty=rs.getInt("amount");
+               }
+            } 
+        	catch (SQLException e) 
+        	{
+                    System.out.println(e.getMessage());
+            }
+            
+        	 if (empty!=-1)
+        	 {
+        		 int value = empty-1;
+        		 String sql_ne = "UPDATE ips SET amount = '"+ value +"' WHERE ip = '"+ipclient+"'";
+         		try
+                 {  
+                     Statement stmt1 = conn.createStatement();   
+                     stmt1.execute(sql_ne);  
+                     stmt1.close();
+                 } 
+                 catch (SQLException e) 
+                 {  
+                     System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
+                 }
+        	 }
+            
             return true;
         } 
         catch (SQLException e) 
@@ -162,7 +271,6 @@ public class Handler
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
             return false;
         }
-    	
     	
     }
     

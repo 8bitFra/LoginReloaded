@@ -1,5 +1,5 @@
 name: LoginReloaded
-version: 1.0
+version: 1.3
 description: Add the login functionality to a Bukkit server.
 author: 8bitFra
 main: fra.plugin.login.Main
