@@ -1,4 +1,4 @@
-<a href="https://www.spigotmc.org/resources/loginreloaded.81861/"><img src="https://raw.githubusercontent.com/8bitFra/LoginReloaded/master/icon%20-%20byChuckchee.png" title="FVCproductions" alt="FVCproductions" width="200" height="200"></a>
+<a href="https://www.spigotmc.org/resources/loginreloaded.81861/"><img src="https://raw.githubusercontent.com/8bitFra/LoginReloaded/master/icon%20-%20byChuckchee.png" title="SpigotPage" alt="SpigotPage" width="200" height="200"></a>
 
 
 
