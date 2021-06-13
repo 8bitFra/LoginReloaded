@@ -4,8 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-import javax.xml.bind.DatatypeConverter;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -57,7 +55,13 @@ public class Handler
 		
 		md.update(pw.getBytes());
 	    byte[] digest = md.digest();
-	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+	    StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+		
+		String myHash = sb.toString().toUpperCase();
         
         
         
@@ -74,7 +78,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7[E1]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7[E1]");
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
         }
     }
@@ -108,7 +112,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7Es [E2]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7Es [E2]");
             System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
         }
     }
@@ -198,7 +202,13 @@ public class Handler
 		
 		md.update(pw.getBytes());
 	    byte[] digest = md.digest();
-	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+	    
+	    StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+		
+		String myHash = sb.toString().toUpperCase();
         
         String sql = "UPDATE users SET pwhash = '"+ myHash +"' WHERE name = '"+p.getName()+"'";
         
@@ -210,7 +220,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7[E3]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7[E3]");
         	e.printStackTrace();
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
         }
@@ -267,7 +277,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	//p.sendMessage("§cERROR: §7[E4]");
+        	//p.sendMessage("ï¿½cERROR: ï¿½7[E4]");
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
             return false;
         }
@@ -300,7 +310,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7[E5]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7[E5]");
             System.out.println("[ERROR] LoginReloaded - Player status cant be save.");
         }
     }
@@ -316,15 +326,15 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7[E6]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7[E6]");
             System.out.println("[ERROR] LoginReloaded - Player status cant be save.");
         }
     }
     
     public static void LogoutCommand(final Player p)
     {
-    	final String Login = Listeners.main.getConfig().getString("Messages.Login").replace("&", "§");
-        final String Register = Listeners.main.getConfig().getString("Messages.Register").replace("&", "§");
+    	final String Login = Listeners.main.getConfig().getString("Messages.Login").replace("&", "ï¿½");
+        final String Register = Listeners.main.getConfig().getString("Messages.Register").replace("&", "ï¿½");
         if (Handler.isRegistered(p.getName())) 
         {
         	Handler.Logout(p);
@@ -359,7 +369,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("§cERROR: §7Es [E2]");
+        	p.sendMessage("ï¿½cERROR: ï¿½7Es [E2]");
             System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
         }
     }
@@ -524,10 +534,15 @@ public class Handler
 		
 		md.update(str.getBytes());
 	    byte[] digest = md.digest();
-	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+	    StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+		
+		String myHash = sb.toString().toUpperCase();
         
         
 	    return pw.equals(myHash);  	
     }
 }
-
