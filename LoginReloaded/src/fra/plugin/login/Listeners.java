@@ -22,6 +22,20 @@ public static Main main;
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
         final Player p = e.getPlayer();
+        
+        final String KickMessage = Listeners.main.getConfig().getString("Messages.KickName");
+        final String McCharacters = "abcdefghijklmnopqrstuvwxyz0123456789_";
+        final String LowerNick = p.getName().toLowerCase();
+       
+        
+        for(int i=0; i<LowerNick.length(); i++)
+        {
+        	if(McCharacters.indexOf(LowerNick.charAt(i)) == -1)
+        	{
+        		p.kickPlayer(KickMessage);
+        	}
+        }
+        
         final String IPsaved = Listeners.main.getConfig().getString("Messages.IPsaved").replace("&", "§");
         final String Login = Listeners.main.getConfig().getString("Messages.Login").replace("&", "§");
         final String Register = Listeners.main.getConfig().getString("Messages.Register").replace("&", "§");
