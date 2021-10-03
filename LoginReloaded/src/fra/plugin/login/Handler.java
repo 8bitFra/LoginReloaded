@@ -78,7 +78,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7[E1]");
+        	p.sendMessage("§cERROR: §7[E1]");
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
         }
     }
@@ -112,7 +112,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7Es [E2]");
+        	p.sendMessage("§cERROR: §7Es [E2]");
             System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
         }
     }
@@ -220,7 +220,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7[E3]");
+        	p.sendMessage("§cERROR: §7[E3]");
         	e.printStackTrace();
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
         }
@@ -277,7 +277,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	//p.sendMessage("�cERROR: �7[E4]");
+        	//p.sendMessage("§cERROR: §7[E4]");
             System.out.println("[ERROR] LoginReloaded - Player data cant be save.");
             return false;
         }
@@ -310,7 +310,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7[E5]");
+        	p.sendMessage("§cERROR: §7[E5]");
             System.out.println("[ERROR] LoginReloaded - Player status cant be save.");
         }
     }
@@ -326,15 +326,15 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7[E6]");
+        	p.sendMessage("§cERROR: §7[E6]");
             System.out.println("[ERROR] LoginReloaded - Player status cant be save.");
         }
     }
     
     public static void LogoutCommand(final Player p)
     {
-    	final String Login = Listeners.main.getConfig().getString("Messages.Login").replace("&", "�");
-        final String Register = Listeners.main.getConfig().getString("Messages.Register").replace("&", "�");
+    	final String Login = Listeners.main.getConfig().getString("Messages.Login").replace("&", "§");
+        final String Register = Listeners.main.getConfig().getString("Messages.Register").replace("&", "§");
         if (Handler.isRegistered(p.getName())) 
         {
         	Handler.Logout(p);
@@ -369,7 +369,7 @@ public class Handler
         } 
         catch (SQLException e) 
         {  
-        	p.sendMessage("�cERROR: �7Es [E2]");
+        	p.sendMessage("§cERROR: §7Es [E2]");
             System.out.println("[ERROR] LoginReloaded - IP Database cant be save.");
         }
     }
