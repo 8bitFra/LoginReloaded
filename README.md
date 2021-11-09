@@ -19,6 +19,7 @@
 -  Password saved using a message-digest algorithm (MD5) in order to improve security
 - Sqlite db save
 - Ability to choose how many accounts a user can register
+- Ability to choose Nickname and Password pattern via Regex.
 
 
 ## Commands
