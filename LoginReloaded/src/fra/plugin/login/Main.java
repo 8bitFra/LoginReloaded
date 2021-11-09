@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
@@ -97,6 +98,8 @@ public class Main extends JavaPlugin implements Listener
         final String MinSix = this.getConfig().getString("Messages.MinSix").replace("&", "§");
         final String IpReach = this.getConfig().getString("Messages.IpReach").replace("&", "§");
         final String Error = this.getConfig().getString("Messages.Error").replace("&", "§");
+        final String IllegalPassword = this.getConfig().getString("Messages.IllegalPassword").replace("&", "§");
+        final String PasswordRegexp = this.getConfig().getString("Messages.PasswordCharacters");
         final String Check1 = this.getConfig().getString("Check.Line1").replace("&", "§");
         final String Check2 = this.getConfig().getString("Check.Line2").replace("&", "§");
         final String Check3 = this.getConfig().getString("Check.Line3").replace("&", "§");
@@ -136,7 +139,11 @@ public class Main extends JavaPlugin implements Listener
                                     count++;    
                             }
                             
-                            if(count < 6)
+                            if(!Pattern.matches(PasswordRegexp, password))
+                            {
+                            	p.sendMessage(IllegalPassword);
+                            }
+                            else if(count < 6)
                             {
                             	p.sendMessage(MinSix);
                             }

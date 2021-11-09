@@ -1,5 +1,7 @@
 package fra.plugin.login;
 
+import java.util.regex.Pattern;
+
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,16 +26,13 @@ public static Main main;
         final Player p = e.getPlayer();
         
         final String KickMessage = Listeners.main.getConfig().getString("Messages.KickName");
-        final String McCharacters = "abcdefghijklmnopqrstuvwxyz0123456789_";
-        final String LowerNick = p.getName().toLowerCase();
-       
+        final String allowedNicks = Listeners.main.getConfig().getString("Messages.NicknameCharacters");
         
-        for(int i=0; i<LowerNick.length(); i++)
+        //"[a-zA-Z0-9_]*"
+        
+        if(!Pattern.matches(allowedNicks, p.getName()))
         {
-        	if(McCharacters.indexOf(LowerNick.charAt(i)) == -1)
-        	{
-        		p.kickPlayer(KickMessage);
-        	}
+        	p.kickPlayer(KickMessage);
         }
         
         final String IPsaved = Listeners.main.getConfig().getString("Messages.IPsaved").replace("&", "§");

@@ -20,6 +20,9 @@ Messages:
   IpReach: '&7[&4Login&7] &cYou have already registered enough accounts on this server.'
   Error: '&7[&4Error&7] &cGeneric Error - See the console for more details.'
   KickName: 'Your name contains illegal characters.'
+  IllegalPassword: '&7[&4Error&7] &cYour password contains illegal characters.'
+  NicknameCharacters: '[a-zA-Z0-9_]*'
+  PasswordCharacters: '[!-~]*'
 AllowIPSaver: true
 QuitKeepAlive: 120
 AccountNumber: 2
