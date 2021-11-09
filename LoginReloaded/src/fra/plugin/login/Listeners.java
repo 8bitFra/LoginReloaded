@@ -26,7 +26,7 @@ public static Main main;
         final Player p = e.getPlayer();
         
         final String KickMessage = Listeners.main.getConfig().getString("Messages.KickName");
-        final String allowedNicks = Listeners.main.getConfig().getString("Messages.NicknameCharacters");
+        final String allowedNicks = Listeners.main.getConfig().getString("NicknameCharacters");
         
         //"[a-zA-Z0-9_]*"
         

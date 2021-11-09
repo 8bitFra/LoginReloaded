@@ -99,7 +99,7 @@ public class Main extends JavaPlugin implements Listener
         final String IpReach = this.getConfig().getString("Messages.IpReach").replace("&", "§");
         final String Error = this.getConfig().getString("Messages.Error").replace("&", "§");
         final String IllegalPassword = this.getConfig().getString("Messages.IllegalPassword").replace("&", "§");
-        final String PasswordRegexp = this.getConfig().getString("Messages.PasswordCharacters");
+        final String PasswordRegexp = this.getConfig().getString("PasswordCharacters");
         final String Check1 = this.getConfig().getString("Check.Line1").replace("&", "§");
         final String Check2 = this.getConfig().getString("Check.Line2").replace("&", "§");
         final String Check3 = this.getConfig().getString("Check.Line3").replace("&", "§");
